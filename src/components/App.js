@@ -1,10 +1,18 @@
-// import logo from './logo.svg';
-// import './App.css';
+import { useEffect } from 'react';
+import { getPosts } from '../api';
 
 function App() {
+  useEffect(() => {
+    const fetchPosts = async () => {
+      const response = getPosts();
+      console.log('response', response);
+    };
+    fetchPosts();
+  }, []);
+
   return (
     <div className="App">
-      <h1>Hello Wprld</h1>
+      <h1>Hello World</h1>
     </div>
   );
 }
