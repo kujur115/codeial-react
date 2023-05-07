@@ -1,13 +1,19 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+//  todo: in place of react -toast- notification.. use react-hot-toast
+// import toast, { Toaster } from 'react-hot-toast';
+
 import './styles/index.css';
 import { App } from './components/index';
+import { AuthProvider } from './providers/AuthProvider';
 // import reportWebVitals from './reportWebVitals';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <App />
+    <AuthProvider>
+      <App />
+    </AuthProvider>
   </React.StrictMode>
 );
 

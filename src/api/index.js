@@ -50,7 +50,7 @@
 //   return customFetch(API_URLS.posts(page, limit), { method: 'GET' });
 // };
 
-import { API_URLS, LOCALSTORAGE_TOKEN_KEY } from '../utils';
+import { API_URLS, LOCALSTORAGE_TOKEN_KEY, getFormBody } from '../utils';
 
 const customFetch = async (url, { body, ...customConfig }) => {
   const token = window.localStorage.getItem(LOCALSTORAGE_TOKEN_KEY);
@@ -72,8 +72,8 @@ const customFetch = async (url, { body, ...customConfig }) => {
   };
 
   if (body) {
-    // config.body = getFormBody(body);
-    config.body = JSON.stringify(body);
+    config.body = getFormBody(body);
+    // config.body = JSON.stringify(body);
   }
 
   try {
