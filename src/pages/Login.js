@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import { Redirect } from 'react-router-dom';
-import { useToasts } from 'react-toast-notifications';
+import { redirect } from 'react-router-dom';
+// import { useToasts } from 'react-toast-notifications';
 
 import styles from '../styles/login.module.css';
 import { useAuth } from '../hooks';
@@ -9,7 +9,7 @@ const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loggingIn, setLoggingIn] = useState(false);
-  const { addToast } = useToasts();
+  // const { addToast } = useToasts();
   const auth = useAuth();
 
   const handleSubmit = async (e) => {
@@ -17,28 +17,25 @@ const Login = () => {
     setLoggingIn(true);
 
     if (!email || !password) {
-      return addToast('Please enter both email and password', {
-        appearance: 'error',
-      });
+      // return addToast('Please enter both email and password', {
+      //   appearance: 'error',
+      // });
+      return console.error('Please enter both email and password');
     }
 
     const response = await auth.login(email, password);
 
     if (response.success) {
-      addToast('Successfully logged in', {
-        appearance: 'success',
-      });
+      console.log('Successfully logged in');
     } else {
-      addToast(response.message, {
-        appearance: 'error',
-      });
+      console.error(response.message);
     }
 
     setLoggingIn(false);
   };
 
   if (auth.user) {
-    return <Redirect to="/" />;
+    return redirect('/');
   }
 
   return (

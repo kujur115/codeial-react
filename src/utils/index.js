@@ -23,6 +23,29 @@ export const API_URLS = {
 
 export const LOCALSTORAGE_TOKEN_KEY = `__coderial_key__`;
 
+export const setItemInLocalStorage = (key, value) => {
+  if (!key || !value) {
+    return console.error('Can not store in Ls');
+  }
+  const valueToStore =
+    typeof value !== 'string' ? JSON.stringify(value) : value;
+  localStorage.setItem(key, valueToStore);
+};
+export const getItemFromLocalStorage = (key) => {
+  if (!key) {
+    return console.error('Cannot get the value from Ls');
+  }
+
+  return localStorage.getItem(key);
+};
+export const removeItemFromLocalStorage = (key) => {
+  if (!key) {
+    return console.error('Cannot remove the value from Ls');
+  }
+
+  localStorage.removeItem(key);
+};
+
 export const getFormBody = (params) => {
   let formBody = [];
   for (let property in params) {

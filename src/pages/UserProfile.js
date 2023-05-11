@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
-import { useParams, useHistory } from 'react-router-dom';
-import { useToasts } from 'react-toast-notifications';
+import { useParams, useNavigate } from 'react-router-dom';
+// import { useToasts } from 'react-toast-notifications';
 
 import { Loader } from '../components';
 import styles from '../styles/settings.module.css';
@@ -12,8 +12,8 @@ const UserProfile = () => {
   const [loading, setLoading] = useState(true);
   const [requestInProgress, setRequestInProgress] = useState(false);
   const { userId } = useParams();
-  const { addToast } = useToasts();
-  const history = useHistory();
+  // const { addToast } = useToasts();
+  const history = useNavigate();
   const auth = useAuth();
 
   useEffect(() => {
@@ -23,9 +23,9 @@ const UserProfile = () => {
       if (response.success) {
         setUser(response.data.user);
       } else {
-        addToast(response.message, {
-          appearance: 'error',
-        });
+        // addToast(response.message, {
+        //   appearance: 'error',
+        // });
         return history.push('/');
       }
 
@@ -33,7 +33,7 @@ const UserProfile = () => {
     };
 
     getUser();
-  }, [userId, history, addToast]);
+  }, [userId, history]);
 
   if (loading) {
     return <Loader />;
@@ -63,13 +63,13 @@ const UserProfile = () => {
       );
 
       auth.updateUserFriends(false, friendship[0]);
-      addToast('Friend removed successfully!', {
-        appearance: 'success',
-      });
+      // addToast('Friend removed successfully!', {
+      //   appearance: 'success',
+      // });
     } else {
-      addToast(response.message, {
-        appearance: 'error',
-      });
+      // addToast(response.message, {
+      //   appearance: 'error',
+      // });
     }
     setRequestInProgress(false);
   };
@@ -83,13 +83,13 @@ const UserProfile = () => {
       const { friendship } = response.data;
 
       auth.updateUserFriends(true, friendship);
-      addToast('Friend added successfully!', {
-        appearance: 'success',
-      });
+      // addToast('Friend added successfully!', {
+      //   appearance: 'success',
+      // });
     } else {
-      addToast(response.message, {
-        appearance: 'error',
-      });
+      // addToast(response.message, {
+      //   appearance: 'error',
+      // });
     }
     setRequestInProgress(false);
   };

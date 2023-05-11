@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import { useHistory, Redirect } from 'react-router-dom';
-import { useToasts } from 'react-toast-notifications';
+import { useNavigate, redirect } from 'react-router-dom';
+// import { useToasts } from 'react-toast-notifications';
 
 import { useAuth } from '../hooks';
 import styles from '../styles/login.module.css';
@@ -11,9 +11,9 @@ const Signup = () => {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [signingUp, setSigningUp] = useState('');
-  const { addToast } = useToasts();
+  // const { addToast } = useToasts();
   const auth = useAuth();
-  const history = useHistory();
+  const history = useNavigate();
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
@@ -21,18 +21,12 @@ const Signup = () => {
 
     let error = false;
     if (!name || !email || !password || !confirmPassword) {
-      addToast('Please fill all the fields', {
-        appearance: 'error',
-        autoDismiss: true,
-      });
+      console.error('Please fill all the fields');
       error = true;
     }
 
     if (password !== confirmPassword) {
-      addToast('Make sure password and confirm password matches', {
-        appearance: 'error',
-        autoDismiss: true,
-      });
+      console.error('Make sure password and confirm password matches');
 
       error = true;
     }
@@ -47,22 +41,16 @@ const Signup = () => {
       history.push('/login');
       setSigningUp(false);
 
-      return addToast('User registered successfully, please login now', {
-        appearance: 'success',
-        autoDismiss: true,
-      });
+      return console.log('User registered successfully, please login now');
     } else {
-      addToast(response.message, {
-        appearance: 'error',
-        autoDismiss: true,
-      });
+      console.error(response.message);
     }
 
     setSigningUp(false);
   };
 
   if (auth.user) {
-    return <Redirect to="/" />;
+    return redirect('/');
   }
 
   return (

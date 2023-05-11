@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useToasts } from 'react-toast-notifications';
+// import { useToasts } from 'react-toast-notifications';
 
 import styles from '../styles/settings.module.css';
 import { useAuth } from '../hooks';
@@ -11,7 +11,7 @@ const Settings = () => {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [savingForm, setSavingForm] = useState(false);
-  const { addToast } = useToasts();
+  // const { addToast } = useToasts();
 
   const clearForm = () => {
     setPassword('');
@@ -23,17 +23,13 @@ const Settings = () => {
 
     let error = false;
     if (!name || !password || !confirmPassword) {
-      addToast('Please fill all the fields', {
-        appearance: 'error',
-      });
+      console.error('Please fill all the fields');
 
       error = true;
     }
 
     if (password !== confirmPassword) {
-      addToast('Password and confirm password does not match', {
-        appearance: 'error',
-      });
+      console.error('Password and confirm password does not match');
 
       error = true;
     }
@@ -55,13 +51,9 @@ const Settings = () => {
       setSavingForm(false);
       clearForm();
 
-      return addToast('User updated successfully', {
-        appearance: 'success',
-      });
+      return console.log('User updated successfully');
     } else {
-      addToast(response.message, {
-        appearance: 'error',
-      });
+      console.error(response.message);
     }
     setSavingForm(false);
   };
