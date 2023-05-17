@@ -1,6 +1,7 @@
 import { Post, Loader, FriendsList, CreatePost } from '../components';
 import styles from '../styles/home.module.css';
-import { useAuth, usePosts } from '../hooks';
+import { useAuth,usePosts  } from '../hooks';
+// import { getPosts } from '../api';
 
 const Home = () => {
   const auth = useAuth();
@@ -14,7 +15,7 @@ const Home = () => {
     <div className={styles.home}>
       <div className={styles.postsList}>
         <CreatePost />
-        {posts.data.map((post) => (
+        {posts.posts.map((post) => (
           <Post post={post} key={`post-${post._id}`} />
         ))}
       </div>

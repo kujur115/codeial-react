@@ -5,11 +5,17 @@ import { useAuth } from '../hooks';
 import {
   BrowserRouter as Router,
   Route,
-  redirect,
   Routes,
+  Navigate,
 } from 'react-router-dom';
 import { Home, Login, Signup, Settings, UserProfile } from '../pages';
 import { Loader, Navbar } from './index';
+// import { useEffect } from 'react';
+// import { getPosts } from '../api';
+
+// const PrivateRoute = ({ children }) => {
+//   return useAuth() ? children : <Navigate to="/login" />;
+// };
 function PrivateRoute({ children, ...rest }) {
   const auth = useAuth();
   return (
@@ -19,28 +25,31 @@ function PrivateRoute({ children, ...rest }) {
         if (auth.user) {
           return children;
         }
-        return redirect('/login');
+        return <Navigate to="/signin" />;
       }}
     />
   );
 }
+// const PrivateRoute = ({ component: Component, ...rest }) => {
+//   const auth = useAuth();
+//   return (
+//     // Show the component only when the user is logged in
+//     // Otherwise, redirect the user to /signin page
+//     <Route
+//       {...rest}
+//       render={(props) =>
+//         auth.user() ? <Component {...props} /> : <Navigate to="/signin" />
+//       }
+//     />
+//   );
+// };
 
 const Page404 = () => {
   return <h1>404</h1>;
 };
 
 function App() {
-  // const [posts, setPosts] = useState([]);
-
   const auth = useAuth();
-
-  // useEffect(() => {
-  //   const fetchPosts = async () => {
-  //     const response = getPosts();
-  //     console.log('response', response);
-  //   };
-  //   fetchPosts();
-  // }, []);
 
   if (auth.loading) {
     return <Loader />;
@@ -53,18 +62,40 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
+
           <Route path="/register" element={<Signup />} />
-          <PrivateRoute>
-            <Route path="/settings" element={<Settings />} />
-          </PrivateRoute>
-          <PrivateRoute>
-            <Route path="/user/:userId" element={<UserProfile />} />{' '}
-          </PrivateRoute>
+          {/* <Route
+            path="/settings"
+            element={
+              <PrivateRoute>
+                <Settings />
+              </PrivateRoute>
+            }
+          /> */}
+          <Route path="/settings" element={<Settings />} />
+          <Route
+            path="/user/:userId"
+            element={
+              <PrivateRoute>
+                <UserProfile />
+              </PrivateRoute>
+            }
+          />
           <Route path="*" element={<Page404 />} />
         </Routes>
       </Router>
     </div>
   );
 }
+// const Appp = () => {
+//   useEffect(() => {
+//     const fetchPosts = async () => {
+//       const response = await getPosts();
+//       console.log('response', response);
+//     };
+//     fetchPosts();
+//   }, []);
+//   return <h1>Hello World</h1>
+// };
 
 export default App;

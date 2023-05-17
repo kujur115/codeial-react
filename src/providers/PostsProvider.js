@@ -4,7 +4,7 @@ import { useProvidePosts } from '../hooks';
 
 const initialState = {
   posts: [],
-  loading: true,
+  loading: false,
   addPostToState: () => {},
   addComment: () => {},
 };

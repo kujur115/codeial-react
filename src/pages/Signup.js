@@ -94,7 +94,7 @@ const Signup = () => {
         />
       </div>
       <div className={styles.field}>
-        <button disabled={signingUp}>
+        <button disabled={signingUp} type="submit">
           {signingUp ? 'Signing up...' : 'Signup'}
         </button>
       </div>
