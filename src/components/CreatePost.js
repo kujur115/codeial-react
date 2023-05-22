@@ -13,6 +13,7 @@ const CreatePost = () => {
     const response = await addPost(post);
     if (response.success) {
       setPost('');
+      console.log('Post added successfully')
       posts.addPostToState(response.data.post);
     }
     setAddingPost(false);

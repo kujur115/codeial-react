@@ -15,7 +15,7 @@ const Home = () => {
     <div className={styles.home}>
       <div className={styles.postsList}>
         <CreatePost />
-        {posts.posts.map((post) => (
+        {posts.data.map((post) => (
           <Post post={post} key={`post-${post._id}`} />
         ))}
       </div>

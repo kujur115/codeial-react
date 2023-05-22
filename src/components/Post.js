@@ -8,7 +8,7 @@ import PropTypes from 'prop-types';
 
 const Post = ({ post }) => {
   const [comment, setComment] = useState('');
-  const [createdComment, setCreatingComment] = useState(false);
+  const [creatingComment, setCreatingComment] = useState(false);
   const posts = usePosts();
 
   const handleAddComment = async (e) => {
